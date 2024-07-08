@@ -76,10 +76,8 @@ if __name__ == '__main__':
     # Add the document to the Firestore collection
     add_document(db_client, "cities", obj.__dict__, "LA")
 
-    # Retrieve and convert the document back to an AlgoLoggerRow object
-    fake_doc = get_document(db_client, "cities", "LA")
-    obj_from_doc = firebase_doc_to_algologrow(fake_doc)
+    # Retrieve the object from Firebase
+    la_doc = get_document(db_client, "cities", "LA")
 
-    # Print the contents of the AlgoLoggerRow object
-    print("Read OBJ")
-    print(algologrow_from_doc.__dict__)
+    # Print the contents of the object read from Firebase
+    print(la_doc)
