@@ -1,7 +1,7 @@
 import unittest
 from decimal import Decimal
 
-from database.firebase_connect import add_document, get_document, firebase_string_to_py_decimal, \
+from firebase_api_main import add_document, get_document, firebase_string_to_py_decimal, \
     py_decimal_to_firebase_string, connect_to_firebase_db
 
 
