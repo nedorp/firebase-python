@@ -4,7 +4,7 @@ from datetime import datetime
 from decimal import Decimal
 
 # Path to the Firebase private key JSON file
-PRIVATE_KEY_JSON = "cryptocobra-51525-firebase-adminsdk-dhel8-05a054ec6b.json"
+PRIVATE_KEY_JSON = "<JSON_Filename_Service_Account_Firebase_Private_Key>"
 
 # Converts a string from Firebase into a Decimal object
 def firebase_string_to_py_decimal(firebase_string):
