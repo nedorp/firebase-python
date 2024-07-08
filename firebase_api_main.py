@@ -17,7 +17,27 @@ class AlgoLoggerRow:
     active_orders = '[]'
     wallet_usd = 0.0
     wallet_btc_in_usd = 0.0
-    deserialized_active_orders = []
+    deserialized_active_orders: [BuyOrderItem] = []
+
+class BuyOrderItem:
+    
+    # Identifier
+    uid = None
+
+    # price of buy of this item
+    buy_price = None
+    
+    # fraction of BTC bought
+    amount_btc = None
+    
+    # timestamp of the operation
+    creation_timestamp = None
+
+    def __init__(self, buy_price, amount_btc, timestamp):
+        self.uid = str(uuid.uuid4())
+        self.buy_price = Decimal(buy_price)
+        self.amount_btc = Decimal(amount_btc)
+        self.creation_timestamp = timestamp
 
 # Converts a string from Firebase into a Decimal object
 def firebase_string_to_py_decimal(firebase_string):
