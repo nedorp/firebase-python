@@ -6,39 +6,6 @@ from decimal import Decimal
 # Path to the Firebase private key JSON file
 PRIVATE_KEY_JSON = "cryptocobra-51525-firebase-adminsdk-dhel8-05a054ec6b.json"
 
-# Data structure with array member
-class AlgoLoggerRow:
-    timestamp = None
-    stationary_percent_change = 0.0
-    tick = None
-    action_code = None
-    amount_usd = None
-    reason = ''
-    active_orders = '[]'
-    wallet_usd = 0.0
-    wallet_btc_in_usd = 0.0
-    deserialized_active_orders: [BuyOrderItem] = []
-
-class BuyOrderItem:
-    
-    # Identifier
-    uid = None
-
-    # price of buy of this item
-    buy_price = None
-    
-    # fraction of BTC bought
-    amount_btc = None
-    
-    # timestamp of the operation
-    creation_timestamp = None
-
-    def __init__(self, buy_price, amount_btc, timestamp):
-        self.uid = str(uuid.uuid4())
-        self.buy_price = Decimal(buy_price)
-        self.amount_btc = Decimal(amount_btc)
-        self.creation_timestamp = timestamp
-
 # Converts a string from Firebase into a Decimal object
 def firebase_string_to_py_decimal(firebase_string):
     return Decimal(firebase_string)
@@ -90,26 +57,6 @@ def add_document(db_client, collection_name, python_dict_data, document_id=None)
         # Otherwise, let Firestore generate an ID for the new document
         db_client.collection(collection_name).document().set(python_dict_data)
 
-# Converts a Firebase document to an AlgoLoggerRow object
-def firebase_doc_to_algologrow(fake_doc):
-    algologrow = AlgoLoggerRow()
-    dict_doc = fake_doc.get().to_dict()
-
-    # Map document fields to AlgoLoggerRow fields
-    algologrow.tick = dict_doc["tick"]
-    algologrow.reason = dict_doc["reason"]
-    algologrow.amount_usd = dict_doc["amount_usd"]
-    algologrow.timestamp = dict_doc["timestamp"]
-    algologrow.wallet_btc_in_usd = dict_doc["wallet_btc_in_usd"]
-    algologrow.wallet_usd = dict_doc["wallet_usd"]
-    algologrow.action_code = dict_doc["action_code"]
-    algologrow.stationary_percent_change = dict_doc["stationary_percent_change"]
-
-    # Convert active orders to a list of BuyOrderItem objects
-    active_orders = dict_doc["active_orders"]
-    algologrow.deserialized_active_orders = [BuyOrderItem(dct["buyPrice"], dct["btcAmount"], dct["timestamp"]) for dct in active_orders]
-    return algologrow
-
 
 if __name__ == '__main__':
 
@@ -124,28 +71,14 @@ if __name__ == '__main__':
     print(doc.get().to_dict())
 
     # Create and save an AlgoLoggerRow object
-    obj = AlgoLoggerRow()
-    obj.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Current timestamp
-    obj.trading_pair = "BTC/USDT"
-    obj.stationary_percent_change = 0.05
-    obj.tick = "99999.5"
-    obj.action_code = "BUY"
-    obj.amount_usd = 1000.00
-    obj.reason = "Signal from trading algorithm"
-    obj.active_orders = [{
-        "buyPrice": 56000,
-        "btcAmount": py_decimal_to_firebase_string(0.0000184645732921654973375),
-        "timestamp": str(datetime.now())
-    }]
-    obj.wallet_usd = 50.0
-    obj.wallet_btc_in_usd = 50.0
-
+    obj = {"city": "Los Angeles", "Country": "USA"}
+    
     # Add the document to the Firestore collection
-    add_document(db_client, "cities", obj.__dict__, "WITHTIMESTAMP")
+    add_document(db_client, "cities", obj.__dict__, "LA")
 
     # Retrieve and convert the document back to an AlgoLoggerRow object
-    fake_doc = get_document(db_client, "cities", "WITHTIMESTAMP")
-    algologrow_from_doc = firebase_doc_to_algologrow(fake_doc)
+    fake_doc = get_document(db_client, "cities", "LA")
+    obj_from_doc = firebase_doc_to_algologrow(fake_doc)
 
     # Print the contents of the AlgoLoggerRow object
     print("Read OBJ")
