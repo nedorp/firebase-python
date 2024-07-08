@@ -1,7 +1,7 @@
 # Firebase Python Utility (firebase-python)
 Basic Operations with Firebase Database (2024)
 
-This repository provides a set of utility functions to interact with Google Firestore using Python. It includes functions for connecting to Firestore, listing collections and documents, adding and retrieving documents, and converting data between Python and Firestore formats.
+This repository (not a python package) provides a set of utility functions to interact with Google Firestore using Python. It includes functions for connecting to Firestore, listing collections and documents, adding and retrieving documents, and converting data between Python and Firestore formats.
 
 ## Prerequisites
 
@@ -36,57 +36,6 @@ This repository provides a set of utility functions to interact with Google Fire
 3. **Set up Firebase Admin SDK:**
 
     - Place your Firebase Admin SDK JSON file (`your-firebase-project-51525-firebase-adminsdk-xyz-xyz.json`) in the project directory.
-    - Ensure the `PRIVATE_KEY_JSON` variable in the script points to this file.
-
-## Usage
-
-### 1. Initialize Firestore Connection
-
-Use the `connect_to_firebase_db` function to initialize a connection to Firestore:
-
-```python
-from your_module import connect_to_firebase_db
-
-db_client = connect_to_firebase_db()
-```
-
-# Firestore Python Utility
-
-This repository provides a set of utility functions to interact with Google Firestore using Python. It includes functions for connecting to Firestore, listing collections and documents, adding and retrieving documents, and converting data between Python and Firestore formats.
-
-## Prerequisites
-
-- Python 3.8+
-- Google Cloud account with Firestore enabled
-- Firebase Admin SDK JSON private key file
-
-## Installation
-
-1. **Clone the repository:**
-
-    ```sh
-    git clone https://github.com/yourusername/firestore-python-utility.git
-    cd firestore-python-utility
-    ```
-
-2. **Install dependencies:**
-
-    Create and activate a virtual environment (optional but recommended):
-
-    ```sh
-    python -m venv venv
-    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
-    ```
-
-    Install the required packages:
-
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-3. **Set up Firebase Admin SDK:**
-
-    - Place your Firebase Admin SDK JSON file (`cryptocobra-51525-firebase-adminsdk-dhel8-05a054ec6b.json`) in the project directory.
     - Ensure the `PRIVATE_KEY_JSON` variable in the script points to this file.
 
 ## Usage
