@@ -1,12 +1,23 @@
 import firebase_admin
-from algo.algo_log import AlgoLoggerRow
-from algo.base_algo import BuyOrderItem
 from firebase_admin import credentials, firestore
 from datetime import datetime
 from decimal import Decimal
 
 # Path to the Firebase private key JSON file
 PRIVATE_KEY_JSON = "cryptocobra-51525-firebase-adminsdk-dhel8-05a054ec6b.json"
+
+# Data structure with array member
+class AlgoLoggerRow:
+    timestamp = None
+    stationary_percent_change = 0.0
+    tick = None
+    action_code = None
+    amount_usd = None
+    reason = ''
+    active_orders = '[]'
+    wallet_usd = 0.0
+    wallet_btc_in_usd = 0.0
+    deserialized_active_orders = []
 
 # Converts a string from Firebase into a Decimal object
 def firebase_string_to_py_decimal(firebase_string):
