@@ -2,7 +2,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 
-PRIVATE_KEY_JSON = "cryptocobra-51525-firebase-adminsdk-dhel8-05a054ec6b.json"
+PRIVATE_KEY_JSON = "<Service Account Private Key JSON from Your Firebase Account>"
 
 
 def connect_and_list_first_document_of_each_collection():
